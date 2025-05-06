@@ -3,8 +3,8 @@
 
   var url = location.search
     .substring(1)
-    .replace(/\/\/github\.com/, '//raw.githubusercontent.com')
-    .replace(/\/blob\//, '/');
+    // .replace(/\/\/github\.com/, '//raw.githubusercontent.com')
+    .replace(/\/blob\//, '/raw/refs/heads/');
 
   console.log({ url });
 
@@ -144,3 +144,43 @@
       });
   else previewForm.style.display = 'block';
 })();
+
+fetch('https://github.com/JenieX/gitmoji-lite/raw/refs/heads/main/index.html', {
+  headers: {
+    accept: '*/*',
+    'accept-language': 'en-US,en;q=0.9,ar;q=0.8,ru;q=0.7,de;q=0.6,it;q=0.5,cy;q=0.4',
+    'cache-control': 'no-cache',
+    pragma: 'no-cache',
+    'sec-ch-ua': '"Not?A_Brand";v="8", "Chromium";v="108", "Microsoft Edge";v="108"',
+    'sec-ch-ua-mobile': '?0',
+    'sec-ch-ua-platform': '"Windows"',
+    'sec-fetch-dest': 'empty',
+    'sec-fetch-mode': 'cors',
+    'sec-fetch-site': 'cross-site',
+    cookie:
+      'tz=Asia%2FRiyadh; tz=Asia%2FRiyadh; preferred_color_mode=dark; color_mode=%7B%22color_mode%22%3A%22dark%22%2C%22light_theme%22%3A%7B%22name%22%3A%22light%22%2C%22color_mode%22%3A%22light%22%7D%2C%22dark_theme%22%3A%7B%22name%22%3A%22dark%22%2C%22color_mode%22%3A%22dark%22%7D%7D; _device_id=d8a4138c18dfff9ba042f8fe2cf7dc56; cpu_bucket=xlg; GHCC=Required:1-Analytics:1-SocialMedia:1-Advertising:1; MicrosoftApplicationsTelemetryDeviceId=598b8471-2b8d-4612-9d2a-861b51101b0a; saved_user_sessions=102888858%3AcDU6yYXBxIeJVMc3--gxQrYq1H8WLRpq_X22Uv5GAexXwcZc; user_session=cDU6yYXBxIeJVMc3--gxQrYq1H8WLRpq_X22Uv5GAexXwcZc; __Host-user_session_same_site=cDU6yYXBxIeJVMc3--gxQrYq1H8WLRpq_X22Uv5GAexXwcZc; logged_in=yes; dotcom_user=JenieX; _octo=GH1.1.303981178.1746380737; _gh_sess=4uWz9l2BywS1whEvYeh9puKj4GrYPb9%2FQVrqYstfvZqsJlUVYDnTtNPFpnxs22YBIEuslgzF%2Bz9lKkjGFUYalW8pZPgN%2FMzajFZKGzrJkP6dES2a7A%2Bd189yVLHd6UcNqTLs6S2XvpmkDDiOEybDvOmMDwPbAdgFaJEwMy3WW%2Ba851OLd0g7tpVHpsKRsUNzUhdU1eqool1Wq%2BW8R8zz507TZIK37APw0%2F7%2By5bdZ6IJwW05tuSo3WBENCFNxKfF9TWX1CdkZqzsQNlhHI%2BIcAmEzB8SWMnxglntezmZ0OkRFKADz9jsqYbfn%2FYAVXlqclL%2B4afDywDwGRefrRiS%2F7YNg%2FLbDq7tAyw4a5WUHifXRNIZk4aul8RUUIrZi2EkrriJWD9kTdhq8DxTy0fO4z13ORsN4nufaByR0DxcRLY%2BWs7AOgGzg7JsAEPI9%2F9B96M1WDnoKF%2BUtNyp2Zg55PrzRhOHdYBrrtk9d6XPDYXjNcrVHNa5RKzuePtsL%2B4Jc9qTztZgUIk%3D--aho95DXuQil2EMEI--rAAAe1gqfPRwzUwhY2L7%2BQ%3D%3D',
+    Referer: 'https://jeniex.github.io/',
+    'Referrer-Policy': 'strict-origin-when-cross-origin',
+  },
+  body: null,
+  method: 'GET',
+  redirect: 'follow',
+});
+
+let request = new XMLHttpRequest();
+request.onreadystatechange = function () {
+  if (this.readyState === 4) {
+    if (this.status === 200) {
+      document.body.className = 'ok';
+      console.log(this.responseText);
+    } else if (this.response == null && this.status === 0) {
+      document.body.className = 'error offline';
+      console.log('The computer appears to be offline.');
+    } else {
+      document.body.className = 'error';
+    }
+  }
+};
+request.withCredentials = true;
+request.open('GET', 'https://github.com/JenieX/gitmoji-lite/raw/refs/heads/main/index.html', true);
+request.send(null);
