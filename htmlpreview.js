@@ -130,7 +130,7 @@
   };
 
   if (url && url.indexOf(location.hostname) < 0)
-    fetchProxy(url, { method: 'GET', credentials: 'include' }, 0)
+    fetchProxy(url, { method: 'GET' }, 0)
       .then(loadHTML)
       .catch(function (error) {
         console.error(error);
