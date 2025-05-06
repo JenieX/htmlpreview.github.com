@@ -1,7 +1,12 @@
 (function () {
   var previewForm = document.getElementById('previewform');
 
-  var url = location.search.substring(1).replace(/\/blob\//, '/'); //Get URL of the raw file
+  var url = location.search
+    .substring(1)
+    .replace(/\/\/github\.com/, '//raw.githubusercontent.com')
+    .replace(/\/blob\//, '/');
+
+  console.log({ url });
 
   var replaceAssets = function () {
     var frame,
@@ -130,7 +135,7 @@
   };
 
   if (url && url.indexOf(location.hostname) < 0)
-    fetchProxy(url, { method: 'GET' }, 0)
+    fetchProxy(url, { method: 'GET', credentials: 'include' }, 0)
       .then(loadHTML)
       .catch(function (error) {
         console.error(error);
